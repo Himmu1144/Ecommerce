@@ -1,6 +1,7 @@
+from email.policy import default
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import Product
+from .models import Product , Contact
 from math import ceil
 
 # Create your views here.
@@ -32,11 +33,22 @@ def productView(request,myid):
     print(product.images)
     return render(request, 'ecommerce/prodView.html',{'product':product})
 
+def contact(request):
+    
+    if request.method == 'POST':
+
+        name = request.POST.get('name',default='')
+        email = request.POST.get('email',default='')
+        phone = request.POST.get('phone',default='')
+        desc = request.POST.get('desc',default='')
+        contact = Contact(name=name,phone=phone,email=email,desc=desc)
+        contact.save()
+
+    return render(request, 'ecommerce/contact.html')
+
 def about(request):
     return render(request, 'ecommerce/about.html')
 
-def contact(request):
-    return render(request, 'ecommerce/contact.html')
 
 def tracker(request):
     return render(request, 'ecommerce/tracker.html')
@@ -46,3 +58,6 @@ def search(request):
 
 def checkout(request):
     return render(request, 'ecommerce/checkout.html')
+
+def cart(request):
+    return render(request, 'ecommerce/cart.html')

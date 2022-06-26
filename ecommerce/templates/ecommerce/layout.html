@@ -46,11 +46,12 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
-            <button type="button" data-bs-html="true" id="popover" class="btn btn-secondary mx-2" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
-                Cart(<span id="cart"></span>)
-              </button>
-              <!-- <button type="button" data-html="true" id="popover" class="btn btn-secondary mx-2" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" title="aami je to maa subhu je to maar" data-bs-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-                Cart (<span id="Cart">0</span>) -->
+            <!-- <button type="button" data-bs-html="true" id="popover" class="btn btn-secondary mx-2" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
+               
+            </button> -->
+
+            <a href="/shop/cart"><button type="button" class="btn btn-secondary mx-2"> Cart(<span id="cart">0</span>) </button></a>
+
         </div>
     </nav>
       
@@ -62,7 +63,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
-    {% block js %} {% endblock js %}
+    <script>
+        
+  if (localStorage.getItem('cart') == null){
+    var cart = {};
+    console.log('empty cart created')
+  }
+  else{
+    cart = JSON.parse(localStorage.getItem('cart'));
+    jabba = Object.values(cart)
+    let sum = 0;
+    for (const key in jabba) {
+      sum+= jabba[key][0];
+        } 
+    document.getElementById('cart').innerHTML = sum;
+      }
+    </script>
+
+{% block script %} {% endblock script %}
+
 
   </body>
 </html>

@@ -1,0 +1,60 @@
+{% extends 'ecommerce/layout.html' %}
+
+{% block title %} cart {% endblock title %}
+
+{% block body %}
+<div class="container">
+    <div class="cart-heading text-center my-4">
+        <h3>My Cart</h3>
+    </div>
+    <div class='cart-ka-saaman'>
+        <h4 class="my-2">Your Cart Items</h4>
+        <pre class="cart-items" id="item-cart">
+        Nothing
+    </pre>
+    </div>
+    <div class="cart-items">
+        <button id="clearcart" onclick="clearcart()" class="btn btn-primary cart mx-2">ClearCart</button></span>
+        <a href="/shop/checkout"><button id="checkout" class="btn btn-primary cart">Checkout</button></span></a>
+    </div>
+</div>
+
+{% endblock body %}
+
+{% block script %}
+<script>
+    cart = JSON.parse(localStorage.getItem('cart'));
+
+    function clearcart() {
+        cart = JSON.parse(localStorage.getItem('cart'));
+        // for (var item in cart){
+        //     document.getElementById(item).innerHTML = '<button id="'+ item +'"  class="btn btn-primary cart">Add To Cart</button></span>'
+        // }
+        localStorage.clear()
+        cart = {};
+        updatecart(cart)
+        updatepopover()
+    }
+
+    function updatepopover() {
+        cart = JSON.parse(localStorage.getItem('cart'));
+        console.log('its working')
+        str = '';
+        i = 1;
+        for (var item in cart) {
+            str = str + i + ') ' + cart[item][1] + ' qty: ' + cart[item][0] + '\n'
+            i += 1;
+        }
+        document.getElementById('item-cart').innerHTML = str;
+    }
+
+    updatepopover()
+
+
+    if ($.isEmptyObject(cart)) {
+        mystr = '<p>Your Cart is empty! , please add some items before checking out...</p>'
+        document.getElementById('item-cart').innerHTML = mystr;
+    }
+
+</script>
+{% endblock script %}
