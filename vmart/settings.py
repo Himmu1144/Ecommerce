@@ -56,7 +56,7 @@ ROOT_URLCONF = 'vmart.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['vmart/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

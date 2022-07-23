@@ -1,5 +1,57 @@
 {% extends 'ecommerce/layout.html' %}
 
-{% block title %} Tracker {% endblock title %}
+{% block title %} Checkout {% endblock title %}
 
-{% block body %} This is the body of Tracker Page {% endblock body %}
+{% block body %}
+<div class="container">
+    <div class="col">
+        <h2 class="my-2">Track Your Order using Email Id & Order Id </h2>
+
+        <form class="row g-3" method="post" action="#" id="trackerForm">{% csrf_token %}
+
+            <div class="col-md-6">
+                <label for="order_id" class="form-label">order_id</label>
+                <input type="text" class="form-control" id="order_id" name="order_id">
+            </div>
+            <div class="col-md-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email">
+            </div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-primary my-2">Track Order</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col">
+        <h4 class="my-2">Your Order Status -</h4>
+        <ol class="list-group list-group-numbered" id="update_inform">
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold">
+                    {{response}}
+                  </div>
+                </div>
+                <span class="badge bg-primary rounded-pill">{{time}}</span>
+              </li>
+        </ol>
+    </div>
+
+</div>
+
+
+{% endblock body %}
+
+{% block script %}
+
+<script>
+
+
+
+$('#trackerForm').submit(function(event) {
+    $('#update_info').empty();
+    $('#update_inform').empty();
+    console.log(response);
+});
+</script>
+{% endblock script %}
