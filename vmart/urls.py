@@ -25,5 +25,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index , name='Home'),
     path('shop/', include('ecommerce.urls')),
-    path('bloger/', include('bloger.urls')),
+    path('blog/', include('bloger.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

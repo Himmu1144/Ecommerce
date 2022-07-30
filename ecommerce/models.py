@@ -34,6 +34,7 @@ class Order(models.Model):
     city = models.CharField(max_length=200)
     state = models.CharField(max_length=200)
     zip_code = models.CharField(max_length=20)
+    amount = models.IntegerField(default=0)
     Json_Items = models.CharField(max_length=5000, default='')
 
 class Order_Update(models.Model):

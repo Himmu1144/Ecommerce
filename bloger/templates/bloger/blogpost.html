@@ -1,0 +1,98 @@
+{% extends 'bloger/layout.html' %}
+{% block title %}
+blogpost
+{% endblock title %}
+ 
+{% block body %}
+<div class="container my-5">
+<div class="row g-5">
+    <div class="col-md-8">
+      <h3 class="pb-4 mb-4 fst-italic border-bottom">
+        <!-- From the Firehose -->
+      </h3>
+
+      <article class="blog-post">
+        
+        <h2>{{post.title}}</h2>
+        <p>{{post.date}}</p>
+        <p>{{post.content}}</p>
+        <!-- <div class="fb-like" data-href="http://127.0.0.1:8000/blog/blogpost/{{post.post_id}}" data-layout="standard" data-action="like" data-size="large" data-show-faces="false" data-share="true"></div><br> -->
+        <!-- for facebook commentor -->
+        <!-- <div class="fb-comments" data-href="http://127.0.0.1:8000/blog/blogpost/{{post.post_id}}" data-numposts="5"></div> -->
+
+       
+      </article>
+
+      <nav class="blog-pagination mt-4" aria-label="Pagination">
+        {% if post.post_id|add:-1 == 0 %}
+          <a class="btn btn-outline-primary rounded-pill" href="/blog/blogpost/{{post.post_id}}">Older</a>
+          <a class="btn btn-outline-primary rounded-pill" href="/blog/blogpost/{{post.post_id|add:1}}">Newer</a>
+        {% elif post.post_id == last_post.post_id %}
+          <a class="btn btn-outline-primary rounded-pill" href="/blog/blogpost/{{post.post_id|add:-1}}">Older</a>
+          <a class="btn btn-outline-primary rounded-pill" href="/blog/blogpost/{{post.post_id}}">Newer</a>
+        {% else %}
+          <a class="btn btn-outline-primary rounded-pill" href="/blog/blogpost/{{post.post_id|add:-1}}">Older</a>
+          <a class="btn btn-outline-primary rounded-pill" href="/blog/blogpost/{{post.post_id|add:1}}">Newer</a>
+        {% endif %}
+      </nav>
+
+    </div>
+
+    <div class="col-md-4">
+      <div class="position-sticky" style="top: 2rem;">
+        <div class="p-4 mb-3 bg-light rounded">
+          <h4 class="fst-italic">About</h4>
+          <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo amet natus ut sapiente, modi molestias eum nobis, ipsum quibusdam quos at maiores, veritatis provident aut? Veniam quos hic at!</p>
+        </div>
+
+        <div class="p-4">
+          <h4 class="fst-italic">Elsewhere</h4>
+          <ol class="list-unstyled">
+            <li><a href="#">GitHub</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Facebook</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<h3>Recommendations -</h3>
+
+<div class="container">
+
+<div class="row mb-2">
+  
+  <div class="col-md-6">
+    <div class="row g-0 mr-1 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="col p-4 d-flex flex-column position-static">
+        <h3 class="mb-0">{{prev_post.title}}</h3>
+        <div class="mb-1 text-muted">{{prev_post.date}}</div>
+        <p class="card-text mb-auto">{{prev_post.content|slice:'0:60'}}</p>
+        <a href="/blog/blogpost/{{prev_post.post_id}}" class="stretched-link">Continue reading</a>
+      </div>
+      <div class="col-auto d-none d-lg-block">
+        <img src="/media/{{prev_post.image}}" class="bd-placeholder-img" width="200" height="250"></img>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="col-md-6">
+    <div class="row g-0 ml-1 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="col p-4 d-flex flex-column position-static">
+        <h3 class="mb-0">{{next_post.title}}</h3>
+        <div class="mb-1 text-muted">{{next_post.date}}</div>
+        <p class="mb-auto">{{next_post.content|slice:'0:60'}}</p>
+        <a href="/blog/blogpost/{{next_post.post_id}}" class="stretched-link">Continue reading</a>
+      </div>
+      <div class="col-auto d-none d-lg-block">
+        <img src="/media/{{next_post.image}}" class="bd-placeholder-img" width="200" height="250"></img>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+{% endblock body %}

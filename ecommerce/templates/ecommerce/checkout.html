@@ -9,14 +9,14 @@
         <h2 class="my-2">Checkout - for all your cart items </h2>
         <ol class="list-group list-group-numbered" id="items">
         </ol>
-        
+
         <ol class="list-group list-group-numbered">
             <li class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
-                  <div class="fw-bold">Total Price :</div>
+                    <div class="fw-bold">Total Price :</div>
                 </div>
                 <span class="badge rounded-pill">Rs.<span id="total"></span></span>
-              </li>
+            </li>
         </ol>
     </div>
 
@@ -24,6 +24,8 @@
         <h2 class="my-2">Your Address</h2>
         <form class="row g-3" method="post" action="/shop/checkout/">{% csrf_token %}
             <input type="hidden" id="Json_Items" name="Json_Items">
+            <input type="hidden" id="amount" name="amount">
+
             <div class="col-md-6">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" id="name" name="name">
@@ -76,7 +78,7 @@
         for (var item in cart) {
             let name = cart[item][1];
             let qty = cart[item][0];
-            let price = cart[item][2]*qty;
+            let price = cart[item][2] * qty;
             mystr = `<li class="list-group-item d-flex justify-content-between align-items-start">
               <div class="ms-2 me-auto">
                 <div class="fw-bold">${name}</div>
@@ -89,10 +91,11 @@
     }
 
     $('#Json_Items').val(JSON.stringify(cart));
+
     {% if thank %}
-        alert('bats your order of id {{id}} has been placed!, Track your order using this id from tracker section...');
-        localStorage.clear();
-        document.location='/shop';
+    alert('bats your order of id {{id}} has been placed!, Track your order using this id from tracker section...');
+    localStorage.clear();
+    document.location = '/shop';
     {% endif %}
 
     cart = JSON.parse(localStorage.getItem('cart'));
@@ -101,11 +104,11 @@
     console.log(jabba)
     let sum = 0;
     for (const key in jabba) {
-      sum+= jabba[key][0]*jabba[key][2];
-        } 
+        sum += jabba[key][0] * jabba[key][2];
+    }
     document.getElementById('total').innerHTML = sum;
-      
 
+    $('#amount').val($('#total').html())
 
 </script>
 {% endblock script %}

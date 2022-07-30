@@ -25,4 +25,5 @@ urlpatterns = [
     path('product/<int:myid>', views.productView,name="ProductView"),
     path('checkout/', views.checkout,name="Checkout"),
     path('cart/', views.cart,name="Cart"),
+    path('handlerequest/', views.handlerequest,name="paymentGateway"),
 ]

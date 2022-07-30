@@ -1,0 +1,16 @@
+{% extends 'ecommerce/layout.html' %}
+
+{% block title %} Status {% endblock title %}
+
+{% block body %}
+
+<div class="container">
+    <h2>Payment Status for your order id {{response.ORDERID}}</h2>
+    {% if response.RESPCODE == '01' %}
+        <p>Order Successfull</p>
+    {% else %}
+        <p>Order Failiure - {{response.RESPMSG}}</p>
+    {% endif %}
+</div>
+
+{% endblock body %}

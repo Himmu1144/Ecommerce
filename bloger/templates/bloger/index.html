@@ -1,16 +1,32 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-  </head>
-  <body>
-    {% load static %}
-    <a href="{% static 'bloger/demo.txt' %}"> click here </a>
-    <button><a href="/shop">shop</a></button>
-    <h1>Hello, world! Bloger Home Page</h1>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-  </body>
-</html>
+{% extends 'bloger/layout.html' %}
+{% block title %}
+Bloger
+{% endblock title %}
+
+{% block body %}
+
+
+<div class="container">
+  
+  <div class="row my-4">
+    {% for blog in blogs %}
+    <div class="col-md-6">
+      <div class="row g-0 mr-1 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <h3 class="mb-0">{{blog.title}}</h3>
+          <div class="mb-1 text-muted">{{blog.date}}</div>
+          <p class="card-text mb-auto">{{blog.content|slice:'0:50'}}</p>
+          <a href="/blog/blogpost/{{blog.post_id}}" class="stretched-link">Continue reading</a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <img src="/media/{{blog.image}}" class="bd-placeholder-img" width="200" height="250"></img>
+        </div>
+      </div>
+    </div>
+  {% if forloop.counter|divisibleby:2 %}
+    </div><div class="row my-4">
+  {% endif %}
+  {% endfor %}
+</div>
+
+{% endblock body %}

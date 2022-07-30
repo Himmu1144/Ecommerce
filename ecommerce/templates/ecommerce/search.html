@@ -51,6 +51,8 @@
 
 {% block body %}
 {% load static %}
+
+
 <div class="container">
   {% for product,range,nslides in allprods %}
     <h4>{{product.0.category}}</h4>
@@ -105,6 +107,12 @@
 {% block script %} 
 
 <script>
+
+
+{% if msg|length != 0 %}
+  alert('{{msg}}');
+  document.location = '/shop/'
+{% endif %}
 
   if (localStorage.getItem('cart') == null){
     var cart = {};
